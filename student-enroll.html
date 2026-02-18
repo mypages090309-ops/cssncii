@@ -4,92 +4,90 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Student Enrollment | Computer System Servicing NC II</title>
+
+  <!-- Font (same style) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- IMPORTANT: dapat ito ang path -->
   <link rel="stylesheet" href="style.css" />
+
+  <!-- JS -->
+  <script src="student-enroll.js" defer></script>
 </head>
 
 <body>
-  <div class="page-wrap">
-    <div class="top-links">
-      <a href="index.html">Home</a>
-      <a href="login.html">Login</a>
-      <a href="trainer-register.html">Trainer Register</a>
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="container nav-flex">
+      <div class="logo">CSS NC II</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a class="nav-btn" href="trainer-register.html">Trainer Register</a>
+      </div>
     </div>
+  </nav>
 
-    <div class="card">
-      <h1 class="title">Student Enrollment</h1>
-      <p class="subtitle">
-        Enroll using your Trainer Code to join your trainer’s class.
-      </p>
+  <!-- HERO / FORM SECTION -->
+  <section class="section alt">
+    <div class="container">
+      <h1 class="section-title">Student Enrollment</h1>
 
-      <form id="studentForm" autocomplete="on">
+      <div class="form-container">
+        <div class="form-card">
+          <h2>Enroll using Trainer Code</h2>
+          <p class="subtext">Ilagay ang Student details at Trainer Code para makasali sa class.</p>
 
-        <!-- Student Info Section -->
-        <div class="section">
-          <h3>Student Information</h3>
-          <div class="grid">
-            <div class="field">
+          <form id="studentEnrollForm" novalidate>
+            <div class="input-group">
               <label for="firstName">First Name</label>
-              <input type="text" id="firstName" name="firstName" placeholder="Juan" required />
+              <input id="firstName" name="firstName" type="text" placeholder="Juan" required />
             </div>
-            <div class="field">
+
+            <div class="input-group">
               <label for="lastName">Last Name</label>
-              <input type="text" id="lastName" name="lastName" placeholder="Dela Cruz" required />
+              <input id="lastName" name="lastName" type="text" placeholder="Dela Cruz" required />
             </div>
-            <div class="field">
+
+            <div class="input-group">
               <label for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="juan@email.com" required />
+              <input id="email" name="email" type="email" placeholder="juan@email.com" required />
             </div>
-            <div class="field">
+
+            <div class="input-group">
               <label for="mobile">Mobile Number</label>
-              <input type="tel" id="mobile" name="mobile" placeholder="09XXXXXXXXX" required />
-              <div class="note">Format: 09XXXXXXXXX</div>
+              <input id="mobile" name="mobile" type="tel" placeholder="09XXXXXXXXX" required />
+              <small class="helper">Format: 09XXXXXXXXX</small>
             </div>
-          </div>
-        </div>
 
-        <!-- Trainer Code Section -->
-        <div class="section">
-          <h3>Trainer Enrollment</h3>
-          <div class="grid">
-            <div class="field">
+            <div class="input-group">
               <label for="trainerCode">Trainer Code</label>
-              <input type="text" id="trainerCode" name="trainerCode" placeholder="TR-XXXXXX" required />
-              <div class="note">This code is given by your trainer.</div>
+              <input id="trainerCode" name="trainerCode" type="text" placeholder="TR-XXXXXX" required />
+              <small class="helper">Ito ang ibibigay ng trainer.</small>
             </div>
-          </div>
-        </div>
 
-        <!-- Account Security Section -->
-        <div class="section">
-          <h3>Account Security</h3>
-          <div class="grid">
-            <div class="field">
-              <label for="password">Password</label>
-              <input type="password" id="password" name="password" placeholder="Create password" required />
-            </div>
-            <div class="field">
-              <label for="confirmPassword">Confirm Password</label>
-              <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-type password" required />
-            </div>
-          </div>
-        </div>
+            <button class="btn-primary" type="submit" id="btnSubmit">
+              Enroll Student
+            </button>
 
-        <!-- Submit Button -->
-        <div class="actions">
-          <button type="submit" class="btn btn-primary" id="submitBtn">
-            Enroll Student
-          </button>
-        </div>
+            <p id="formMsg" class="form-msg" aria-live="polite"></p>
+          </form>
 
-        <!-- Helper Links -->
-        <div class="helper">
-          Already enrolled? <a href="login.html">Login here</a>
+          <p class="form-footer">
+            Already registered? <a href="login.html">Login here</a>
+          </p>
         </div>
-      </form>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Link JS here -->
-  <script src="student-enroll.js"></script>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 Computer System Servicing – National Certificate II</p>
+    </div>
+  </footer>
 </body>
 </html>
