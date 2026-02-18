@@ -1,93 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Student Enrollment | Computer System Servicing NC II</title>
-
-  <!-- Font (same style) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- IMPORTANT: dapat ito ang path -->
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- JS -->
-  <script src="student-enroll.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Enrollment</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <!-- NAV -->
-  <nav class="navbar">
-    <div class="container nav-flex">
-      <div class="logo">CSS NC II</div>
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="login.html">Login</a>
-        <a class="nav-btn" href="trainer-register.html">Trainer Register</a>
-      </div>
-    </div>
-  </nav>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/trainer-register">Trainer Register</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <!-- HERO / FORM SECTION -->
-  <section class="section alt">
-    <div class="container">
-      <h1 class="section-title">Student Enrollment</h1>
+    <main>
+        <section class="enrollment">
+            <h1>Student Enrollment</h1>
+            <p>Enroll using Trainer Code to join your trainer's class.</p>
 
-      <div class="form-container">
-        <div class="form-card">
-          <h2>Enroll using Trainer Code</h2>
-          <p class="subtext">Ilagay ang Student details at Trainer Code para makasali sa class.</p>
+            <form id="studentEnrollForm">
+                <h3>Student Information</h3>
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" required>
+                
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="mobile">Mobile Number:</label>
+                <input type="text" id="mobile" name="mobile" pattern="09\d{9}" placeholder="09XXXXXXXXX" required>
 
-          <form id="studentEnrollForm" novalidate>
-            <div class="input-group">
-              <label for="firstName">First Name</label>
-              <input id="firstName" name="firstName" type="text" placeholder="Juan" required />
-            </div>
+                <h3>Trainer Enrollment</h3>
+                <label for="trainerCode">Trainer Code:</label>
+                <input type="text" id="trainerCode" name="trainerCode" placeholder="Enter Trainer Code" required>
 
-            <div class="input-group">
-              <label for="lastName">Last Name</label>
-              <input id="lastName" name="lastName" type="text" placeholder="Dela Cruz" required />
-            </div>
+                <h3>Account Security</h3>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                
+                <button type="submit">Enroll</button>
+            </form>
+        </section>
+    </main>
 
-            <div class="input-group">
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" placeholder="juan@email.com" required />
-            </div>
+    <footer>
+        <p>&copy; 2026 Computer System Servicing - National Certificate II</p>
+    </footer>
 
-            <div class="input-group">
-              <label for="mobile">Mobile Number</label>
-              <input id="mobile" name="mobile" type="tel" placeholder="09XXXXXXXXX" required />
-              <small class="helper">Format: 09XXXXXXXXX</small>
-            </div>
-
-            <div class="input-group">
-              <label for="trainerCode">Trainer Code</label>
-              <input id="trainerCode" name="trainerCode" type="text" placeholder="TR-XXXXXX" required />
-              <small class="helper">Ito ang ibibigay ng trainer.</small>
-            </div>
-
-            <button class="btn-primary" type="submit" id="btnSubmit">
-              Enroll Student
-            </button>
-
-            <p id="formMsg" class="form-msg" aria-live="polite"></p>
-          </form>
-
-          <p class="form-footer">
-            Already registered? <a href="login.html">Login here</a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container">
-      <p>© 2026 Computer System Servicing – National Certificate II</p>
-    </div>
-  </footer>
+    <script src="index.js"></script>
 </body>
 </html>
