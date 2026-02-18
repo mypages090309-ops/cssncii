@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login | Computer System Servicing NC II</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-body">
+
+<div class="auth-bg"></div>
+
+<div class="auth-wrapper">
+  <div class="auth-card fade-in">
+
+    <div class="auth-header">
+      <h2>Welcome Back</h2>
+      <p>Login to access your dashboard</p>
+    </div>
+
+    <!-- INLINE ERROR -->
+    <div id="loginError" class="auth-error" style="display:none;"></div>
+
+    <form id="loginForm" class="auth-form">
+
+      <div class="input-group">
+        <label>Email Address</label>
+        <input type="email" required />
+      </div>
+
+      <div class="input-group password-group">
+        <label>Password</label>
+        <div class="password-wrap">
+          <input type="password" id="passwordInput" required />
+          <button type="button" id="togglePassword">👁️</button>
+        </div>
+      </div>
+
+      <button class="btn-primary full-width" id="loginBtn">
+        <span class="btn-text">Login</span>
+        <span class="spinner" style="display:none;"></span>
+      </button>
+
+      <div class="auth-links">
+        <span>New here?</span>
+        <a href="trainer-register.html">Register as Trainer</a>
+        <span>•</span>
+        <a href="student-enroll.html">Enroll as Student</a>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+<script src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Enrollment | Computer System Servicing NC II</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="container nav-flex">
+    <div class="brand">
+      Computer System Servicing<br>
+      <span>National Certificate II</span>
+    </div>
+    <nav>
+      <a href="index.html" class="nav-btn">Back to Home</a>
+    </nav>
+  </div>
+</header>
+
+<section class="section alt">
+  <div class="container form-container">
+
+    <div class="form-card">
+      <h2>Student Enrollment</h2>
+      <p class="form-sub">
+        Enroll under a registered trainer using a valid Trainer Code.
+      </p>
+
+      <form id="studentForm">
+
+        <!-- STUDENT INFO -->
+        <h4 class="form-section-title">Student Information</h4>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" required>
+          </div>
+
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" required>
+          </div>
+
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" required>
+          </div>
+
+          <div class="form-group">
+            <label>Mobile Number</label>
+            <input type="tel" required>
+          </div>
+        </div>
+
+        <!-- TRAINER CODE -->
+        <h4 class="form-section-title">Trainer Assignment</h4>
+
+        <div class="form-grid">
+          <div class="form-group full-span">
+            <label>Trainer Code</label>
+            <input
+              type="text"
+              placeholder="Enter Trainer Code provided by your trainer"
+              required
+            >
+          </div>
+        </div>
+
+        <!-- ACCOUNT -->
+        <h4 class="form-section-title">Account Security</h4>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" required>
+          </div>
+
+          <div class="form-group">
+            <label>Confirm Password</label>
+            <input type="password" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary full-width">
+          Enroll Student
+        </button>
+
+        <p class="form-note">
+          Already enrolled?
+          <a href="login.html">Login here</a>
+        </p>
+
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <p>© 2026 Computer System Servicing – National Certificate II</p>
+</footer>
+
+<script src="student-enroll.js"></script>
+</body>
+</html>

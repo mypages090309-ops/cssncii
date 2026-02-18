@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Trainer Registration | Computer System Servicing NC II</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="container nav-flex">
+    <div class="brand">
+      Computer System Servicing<br>
+      <span>National Certificate II</span>
+    </div>
+    <nav>
+      <a href="index.html" class="nav-btn">Back to Home</a>
+    </nav>
+  </div>
+</header>
+
+<section class="section alt">
+  <div class="container form-container">
+
+    <div class="form-card">
+      <h2>Trainer Registration</h2>
+      <p class="form-sub">
+        Register as a certified trainer and manage your own group of students.
+      </p>
+
+      <form id="trainerForm" novalidate>
+
+        <!-- PERSONAL INFO -->
+        <h4 class="form-section-title">Personal Information</h4>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input id="firstName" name="firstName" type="text" autocomplete="given-name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input id="lastName" name="lastName" type="text" autocomplete="family-name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="mobile">Mobile Number</label>
+            <input id="mobile" name="mobile" type="tel" autocomplete="tel" required>
+          </div>
+        </div>
+
+        <!-- TRAINING INFO -->
+        <h4 class="form-section-title">Training Center Information</h4>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="centerName">Training Center Name</label>
+            <input id="centerName" name="centerName" type="text" required>
+          </div>
+
+          <div class="form-group">
+            <label for="tesdaNo">Trainer Qualification Number (TESDA)</label>
+            <input id="tesdaNo" name="tesdaNo" type="text" required>
+          </div>
+        </div>
+
+        <!-- ACCOUNT -->
+        <h4 class="form-section-title">Account Security</h4>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" autocomplete="new-password" required>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary full-width" id="registerBtn">
+          Register Trainer
+        </button>
+
+        <!-- TRAINER CODE (HIDDEN UNTIL GENERATED) -->
+        <div id="trainerCodeBox" style="display:none; margin-top:35px; text-align:center;">
+          <p style="font-weight:600;">Your Trainer Code</p>
+
+          <div
+            id="trainerCode"
+            style="
+              font-size:1.5rem;
+              font-weight:800;
+              letter-spacing:2px;
+              background:#020617;
+              color:#fff;
+              padding:14px 24px;
+              border-radius:12px;
+              display:inline-block;
+              margin-top:8px;
+            ">
+          </div>
+
+          <p style="margin-top:12px; font-size:.9rem; color:#475569;">
+            Share this code with your students for enrollment.
+          </p>
+        </div>
+
+        <p class="form-note">
+          Already registered?
+          <a href="login.html">Login here</a>
+        </p>
+
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <p>© 2026 Computer System Servicing – National Certificate II</p>
+</footer>
+
+<script src="trainer-register.js"></script>
+</body>
+</html>
