@@ -1,64 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tl">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Enrollment</title>
-    <link rel="stylesheet" href="student-enroll.css"> <!-- Separate CSS para sa page na ito -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Enrollment</title>
+
+  <!-- SEPARATE CSS (hindi gagalawin ang style.css mo) -->
+  <link rel="stylesheet" href="/student-enroll.css" />
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="trainer-register.html">Trainer Register</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <div class="student-enrollment-form">
-        <h1>Student Enrollment</h1>
-        <p>Enroll using Trainer Code to join your trainer's class.</p>
+  <!-- Top Nav (same style idea sa trainer register) -->
+  <header class="topbar">
+    <div class="brand">CSS NC II</div>
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/login">Login</a>
+      <a class="btn" href="/trainer-register">Trainer Register</a>
+    </nav>
+  </header>
 
-        <!-- Student Enrollment Form -->
-        <form id="student-enroll-form">
-            <div>
-                <h3>Student Information</h3>
-                <label for="first-name">First Name</label>
-                <input type="text" id="first-name" name="first-name" required>
+  <main class="page">
+    <section class="card">
+      <h1>Student Enrollment</h1>
+      <p class="sub">
+        Enroll using Trainer Code para makasali sa class ng trainer.
+      </p>
 
-                <label for="last-name">Last Name</label>
-                <input type="text" id="last-name" name="last-name" required>
+      <form id="studentForm" class="form">
+        <h2>Student Information</h2>
 
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
+        <div class="grid">
+          <div class="field">
+            <label for="firstName">First Name</label>
+            <input id="firstName" name="firstName" type="text" placeholder="Juan" required />
+          </div>
 
-                <label for="mobile-number">Mobile Number</label>
-                <input type="tel" id="mobile-number" name="mobile-number" required placeholder="09XXXXXXXXX">
+          <div class="field">
+            <label for="lastName">Last Name</label>
+            <input id="lastName" name="lastName" type="text" placeholder="Dela Cruz" required />
+          </div>
 
-                <h3>Trainer Enrollment</h3>
-                <label for="trainer-code">Trainer Code</label>
-                <input type="text" id="trainer-code" name="trainer-code" required placeholder="Enter Trainer Code">
-            </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="juan@email.com" required />
+          </div>
 
-            <h3>Account Security</h3>
+          <div class="field">
+            <label for="mobile">Mobile Number</label>
+            <input id="mobile" name="mobile" type="tel" placeholder="09XXXXXXXXX" required />
+            <small>Format: 09XXXXXXXXX</small>
+          </div>
+        </div>
+
+        <h2>Trainer Enrollment</h2>
+        <div class="field">
+          <label for="trainerCode">Trainer Code</label>
+          <input id="trainerCode" name="trainerCode" type="text" placeholder="TR-XXXXXX" required />
+          <small>Ibibigay ito ng trainer mo.</small>
+        </div>
+
+        <h2>Account Security</h2>
+        <div class="grid">
+          <div class="field">
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
+            <input id="password" name="password" type="password" placeholder="Create password" required />
+          </div>
 
-            <label for="confirm-password">Confirm Password</label>
-            <input type="password" id="confirm-password" name="confirm-password" required>
+          <div class="field">
+            <label for="confirmPassword">Confirm Password</label>
+            <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm password" required />
+          </div>
+        </div>
 
-            <button type="submit">Enroll</button>
-        </form>
-    </div>
+        <div class="actions">
+          <button type="submit" class="submit">Enroll</button>
+          <a class="link" href="/login">Already registered? Login here</a>
+        </div>
 
-    <footer>
-        <p>&copy; 2026 Computer System Servicing - National Certificate II</p>
-    </footer>
+        <div id="msg" class="msg" aria-live="polite"></div>
+      </form>
+    </section>
+  </main>
 
-    <script src="student-enroll.js"></script>
+  <footer class="footer">
+    © 2026 Computer System Servicing - National Certificate II
+  </footer>
+
+  <!-- IMPORTANT: Ito ang JS ng student page (hindi index.js) -->
+  <script src="/student-enroll.js" defer></script>
 </body>
 </html>
-
