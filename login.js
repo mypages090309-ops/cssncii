@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const togglePasswordButton = document.getElementById("togglePassword");
   const passwordInput = document.getElementById("passwordInput");
 
+  // Toggle password visibility
   togglePasswordButton.addEventListener("click", function() {
     const type = passwordInput.type === "password" ? "text" : "password";
     passwordInput.type = type;
@@ -19,8 +20,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const email = loginForm.querySelector("input[type=email]").value;
     const password = loginForm.querySelector("input[type=password]").value;
 
-    // Send login request to Cloudflare Worker
-    const response = await fetch("https://your-worker-url/api/login", { 
+    // Send login request to Cloudflare Worker API endpoint
+    const response = await fetch("https://cssncii-7et.pages.dev/api/login", { // Make sure this URL is correct
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -31,11 +32,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const result = await response.json();
 
     if (response.ok) {
-      // Redirect based on role
+      // Redirect based on role (trainer or student)
       if (result.role === 'trainer') {
-        window.location.href = "trainer-dashboard.html"; // Redirect to Trainer's Dashboard
+        window.location.href = "trainer-dashboard.html";  // Redirect to Trainer's Dashboard
       } else if (result.role === 'student') {
-        window.location.href = "student-dashboard.html"; // Redirect to Student's Dashboard
+        window.location.href = "student-dashboard.html";  // Redirect to Student's Dashboard
       }
     } else {
       // On failed login, show error message
