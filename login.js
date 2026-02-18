@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const password = loginForm.querySelector("input[type=password]").value;
 
     // Send login request to Cloudflare Worker API endpoint
-    const response = await fetch("https://cssncii-7et.pages.dev/api/login", {  // Update this URL with your correct Cloudflare Worker URL
+    const response = await fetch("https://cssncii-api.nextwavehub01.workers.dev/api/login", {  // Palitan ito ng tamang URL ng iyong Cloudflare Worker API
       method: "POST",
       headers: {
         "Content-Type": "application/json"
