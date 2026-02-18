@@ -1,40 +1,82 @@
-const form = document.getElementById("enrollForm");
+(function () {
+  const form = document.getElementById("studentEnrollForm");
+  const statusEl = document.getElementById("status");
+  const btn = document.getElementById("enrollBtn");
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+  function setStatus(msg, type = "info") {
+    statusEl.textContent = msg || "";
+    statusEl.className = "status " + type; // status info | ok | error
+  }
 
-  const data = {
-    firstName: document.getElementById("firstName").value,
-    lastName: document.getElementById("lastName").value,
-    email: document.getElementById("email").value,
-    mobile: document.getElementById("mobile").value,
-    trainerCode: document.getElementById("trainerCode").value,
-    password: document.getElementById("password").value
-  };
+  function normalizeMobile(mobile) {
+    return (mobile || "").trim().replace(/\s+/g, "");
+  }
 
-  try {
-    const res = await fetch(
-      "https://cssncii-api.nextwavehub01.workers.dev/api/student/enroll", // Use the correct endpoint for enrollment
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      }
-    );
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    setStatus("");
 
-    const result = await res.json();
+    const firstName = document.getElementById("firstName").value.trim();
+    const lastName = document.getElementById("lastName").value.trim();
+    const email = document.getElementById("email").value.trim().toLowerCase();
+    const mobile = normalizeMobile(document.getElementById("mobile").value);
+    const trainerCode = document.getElementById("trainerCode").value.trim();
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
 
-    if (res.ok) {
-      alert("Enrollment successful! Student Code: " + result.studentCode);
-      form.reset(); // Reset the form after successful submission
-    } else {
-      alert(result.error || "Enrollment failed.");
+    if (!firstName || !lastName || !email || !mobile || !trainerCode || !password) {
+      setStatus("Paki kumpletuhin lahat ng fields.", "error");
+      return;
     }
 
-  } catch (err) {
-    alert("Server error.");
-    console.error(err);
-  }
-});
+    if (password !== confirmPassword) {
+      setStatus("Hindi magkapareho ang password at confirm password.", "error");
+      return;
+    }
+
+    // PH mobile: 09 + 9 digits = 11 chars total
+    if (!/^09\d{9}$/.test(mobile)) {
+      setStatus("Invalid mobile format. Dapat 09XXXXXXXXX.", "error");
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = "Enrolling...";
+    setStatus("Nag-eenroll...");
+
+    try {
+      // IMPORTANT: same domain para walang CORS issue
+      const res = await fetch("/api/student/enroll", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          mobile,
+          trainerCode,
+          password,
+        }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        setStatus(data?.error || "Enrollment failed.", "error");
+        return;
+      }
+
+      // success
+      const msg = data?.message || "Enrollment successful!";
+      setStatus(msg, "ok");
+      alert(msg);
+
+      form.reset();
+    } catch (err) {
+      setStatus("Server error / network error. Pakisubukan ulit.", "error");
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Enroll";
+    }
+  });
+})();
