@@ -1,68 +1,79 @@
 // student-enroll.js
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("studentForm");
-  const msg = document.getElementById("msg"); // optional message div
 
-  if (!form) {
-    console.error("Form not found: #studentForm");
-    return;
+// ✅ Palitan kung iba ang Worker domain mo
+const API_BASE = "https://cssncii-api.nextwavehub01.workers.dev";
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("studentEnrollForm");
+  const msg = document.getElementById("formMsg");
+  const btn = document.getElementById("btnSubmit");
+
+  function setMsg(text, ok = false) {
+    msg.textContent = text;
+    msg.style.marginTop = "12px";
+    msg.style.fontWeight = "600";
+    msg.style.color = ok ? "#16a34a" : "#dc2626";
+  }
+
+  function normalizeMobile(m) {
+    return (m || "").trim();
   }
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    setMsg("");
 
-    const payload = {
-      firstName: document.getElementById("firstName").value.trim(),
-      lastName: document.getElementById("lastName").value.trim(),
-      email: document.getElementById("email").value.trim().toLowerCase(),
-      mobile: document.getElementById("mobile").value.trim(),
-      trainerCode: document.getElementById("trainerCode").value.trim().toUpperCase(),
-      password: document.getElementById("password").value,
-      confirmPassword: document.getElementById("confirmPassword").value,
-    };
+    const firstName = (document.getElementById("firstName").value || "").trim();
+    const lastName = (document.getElementById("lastName").value || "").trim();
+    const email = (document.getElementById("email").value || "").trim().toLowerCase();
+    const mobile = normalizeMobile(document.getElementById("mobile").value);
+    const trainerCode = (document.getElementById("trainerCode").value || "").trim().toUpperCase();
 
-    // Check if passwords match
-    if (payload.password !== payload.confirmPassword) {
-      alert("Passwords do not match!");
+    if (!firstName || !lastName || !email || !mobile || !trainerCode) {
+      setMsg("Pakikumpleto lahat ng fields.");
       return;
     }
 
-    // Validation for required fields
-    const requiredFields = ["firstName", "lastName", "email", "mobile", "trainerCode", "password"];
-    for (let field of requiredFields) {
-      if (!payload[field]) {
-        alert(`Please fill out the ${field}.`);
-        return;
-      }
+    if (!email.includes("@")) {
+      setMsg("Invalid email.");
+      return;
     }
 
-    try {
-      if (msg) msg.textContent = "Registering...";
+    // simple PH mobile check
+    if (!/^09\d{9}$/.test(mobile)) {
+      setMsg("Mobile format dapat 09XXXXXXXXX.");
+      return;
+    }
 
-      // Send data to the backend API
-      const res = await fetch("https://cssncii-api.nextwavehub01.workers.dev/api/student/enroll", {
+    btn.disabled = true;
+    btn.textContent = "Submitting...";
+
+    try {
+      const res = await fetch(`${API_BASE}/api/student/enroll`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ firstName, lastName, email, mobile, trainerCode }),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
 
-      // Handle response from the server
-      if (res.ok && data.success) {
-        const successMsg = `Student successfully enrolled! Student ID: ${data.studentId}`;
-        if (msg) msg.textContent = successMsg;
-        alert(successMsg);
-        form.reset();
-      } else {
-        const errorMsg = data?.error || "Enrollment failed.";
-        if (msg) msg.textContent = errorMsg;
-        alert(errorMsg);
+      if (!res.ok) {
+        setMsg(data.error || "Enrollment failed.");
+        return;
       }
+
+      // ✅ adjust ito depende sa response ng backend mo
+      // example: { success:true, studentId:"ST-...", trainerCode:"TR-..." }
+      const info = data.studentId ? ` Student ID: ${data.studentId}` : "";
+      setMsg(`Enrollment successful!${info}`, true);
+
+      // optional reset
+      form.reset();
     } catch (err) {
-      console.error(err);
-      if (msg) msg.textContent = "Network or server error.";
-      alert("Network or server error.");
+      setMsg("Network error. Subukan ulit.");
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Enroll Student";
     }
   });
 });
