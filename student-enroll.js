@@ -1,79 +1,34 @@
-// student-enroll.js
+document.getElementById("student-enroll-form").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent form submission
 
-// ✅ Palitan kung iba ang Worker domain mo
-const API_BASE = "https://cssncii-api.nextwavehub01.workers.dev";
+    // Get form values
+    const firstName = document.getElementById("first-name").value;
+    const lastName = document.getElementById("last-name").value;
+    const email = document.getElementById("email").value;
+    const mobile = document.getElementById("mobile-number").value;
+    const trainerCode = document.getElementById("trainer-code").value;
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirm-password").value;
 
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("studentEnrollForm");
-  const msg = document.getElementById("formMsg");
-  const btn = document.getElementById("btnSubmit");
-
-  function setMsg(text, ok = false) {
-    msg.textContent = text;
-    msg.style.marginTop = "12px";
-    msg.style.fontWeight = "600";
-    msg.style.color = ok ? "#16a34a" : "#dc2626";
-  }
-
-  function normalizeMobile(m) {
-    return (m || "").trim();
-  }
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    setMsg("");
-
-    const firstName = (document.getElementById("firstName").value || "").trim();
-    const lastName = (document.getElementById("lastName").value || "").trim();
-    const email = (document.getElementById("email").value || "").trim().toLowerCase();
-    const mobile = normalizeMobile(document.getElementById("mobile").value);
-    const trainerCode = (document.getElementById("trainerCode").value || "").trim().toUpperCase();
-
-    if (!firstName || !lastName || !email || !mobile || !trainerCode) {
-      setMsg("Pakikumpleto lahat ng fields.");
-      return;
-    }
-
-    if (!email.includes("@")) {
-      setMsg("Invalid email.");
-      return;
-    }
-
-    // simple PH mobile check
-    if (!/^09\d{9}$/.test(mobile)) {
-      setMsg("Mobile format dapat 09XXXXXXXXX.");
-      return;
-    }
-
-    btn.disabled = true;
-    btn.textContent = "Submitting...";
-
-    try {
-      const res = await fetch(`${API_BASE}/api/student/enroll`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ firstName, lastName, email, mobile, trainerCode }),
-      });
-
-      const data = await res.json().catch(() => ({}));
-
-      if (!res.ok) {
-        setMsg(data.error || "Enrollment failed.");
+    // Validate password match
+    if (password !== confirmPassword) {
+        alert("Passwords do not match!");
         return;
-      }
-
-      // ✅ adjust ito depende sa response ng backend mo
-      // example: { success:true, studentId:"ST-...", trainerCode:"TR-..." }
-      const info = data.studentId ? ` Student ID: ${data.studentId}` : "";
-      setMsg(`Enrollment successful!${info}`, true);
-
-      // optional reset
-      form.reset();
-    } catch (err) {
-      setMsg("Network error. Subukan ulit.");
-    } finally {
-      btn.disabled = false;
-      btn.textContent = "Enroll Student";
     }
-  });
+
+    // Check if mobile number is valid (example format: 09XXXXXXXXX)
+    const mobilePattern = /09\d{9}/;
+    if (!mobilePattern.test(mobile)) {
+        alert("Invalid mobile number format!");
+        return;
+    }
+
+    // Proceed with form submission (you can send this data to your backend here)
+    alert("Student registered successfully!");
+
+    // Only reset after success message (2 seconds delay)
+    setTimeout(function() {
+        document.getElementById("student-enroll-form").reset();
+    }, 2000); // wait 2 seconds before resetting
 });
+
