@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Enrollment | Computer System Servicing NC II</title>
+
+  <!-- Use your existing stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* Safe minimal styling in case style.css doesn't cover */
+    .page-wrap { max-width: 980px; margin: 0 auto; padding: 24px 16px; }
+    .card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 22px; }
+    .title { margin: 0 0 6px; font-size: 28px; }
+    .subtitle { margin: 0 0 18px; opacity: 0.85; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 720px){ .grid { grid-template-columns: 1fr; } }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    label { font-weight: 600; font-size: 14px; }
+    input, select {
+      padding: 12px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.15);
+      color: inherit;
+      outline: none;
+    }
+    input::placeholder { opacity: 0.7; }
+    .section { margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.10); }
+    .section h3 { margin: 0 0 10px; font-size: 16px; opacity: 0.95; }
+    .actions { margin-top: 16px; display: flex; gap: 10px; align-items: center; }
+    .btn {
+      width: 100%;
+      padding: 14px 14px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .btn-primary { background: #1f4aa8; color: #fff; }
+    .helper { margin-top: 12px; text-align: center; opacity: 0.9; }
+    .helper a { color: #7ab6ff; text-decoration: none; font-weight: 700; }
+    .top-links { margin-bottom: 14px; }
+    .top-links a { margin-right: 10px; color: #7ab6ff; text-decoration: none; font-weight: 700; }
+    .note { font-size: 12px; opacity: 0.8; margin-top: 6px; }
+  </style>
+</head>
+
+<body>
+  <div class="page-wrap">
+    <div class="top-links">
+      <a href="index.html">Home</a>
+      <a href="login.html">Login</a>
+      <a href="trainer-register.html">Trainer Register</a>
+    </div>
+
+    <div class="card">
+      <h1 class="title">Student Enrollment</h1>
+      <p class="subtitle">
+        Enroll using your Trainer Code to join your trainer’s class.
+      </p>
+
+      <!-- IMPORTANT: form id for JS -->
+      <form id="studentForm" autocomplete="on">
+
+        <div class="section">
+          <h3>Student Information</h3>
+
+          <div class="grid">
+            <div class="field">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" name="firstName" placeholder="Juan" required />
+            </div>
+
+            <div class="field">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" name="lastName" placeholder="Dela Cruz" required />
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="juan@email.com" required />
+            </div>
+
+            <div class="field">
+              <label for="mobile">Mobile Number</label>
+              <input type="tel" id="mobile" name="mobile" placeholder="09XXXXXXXXX" required />
+              <div class="note">Format: 09XXXXXXXXX</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>Trainer Enrollment</h3>
+
+          <div class="grid">
+            <div class="field">
+              <label for="trainerCode">Trainer Code</label>
+              <input type="text" id="trainerCode" name="trainerCode" placeholder="TR-XXXXXX" required />
+              <div class="note">This code is given by your trainer.</div>
+            </div>
+
+            <div class="field">
+              <label for="sectionName">Section / Class (optional)</label>
+              <input type="text" id="sectionName" name="sectionName" placeholder="CSS-NC2-A" />
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>Account Security</h3>
+
+          <div class="grid">
+            <div class="field">
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password" placeholder="Create password" required />
+            </div>
+
+            <div class="field">
+              <label for="confirmPassword">Confirm Password</label>
+              <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-type password" required />
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn btn-primary" id="submitBtn">
+            Enroll Student
+          </button>
+        </div>
+
+        <div class="helper">
+          Already enrolled? <a href="login.html">Login here</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JS will be added next -->
+  <!-- <script src="student-enroll.js"></script> -->
+</body>
+</html>
