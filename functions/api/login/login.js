@@ -1,52 +1,49 @@
-const bcrypt = require("bcryptjs"); // Use bcrypt for password hashing and comparison
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+    
+    // Handle login POST request
+    if (url.pathname === "/api/login" && request.method === "POST") {
+      try {
+        const body = await request.json();
+        const { email, password } = body;
 
-module.exports = async function (req, res) {
-  const { email, password } = req.body;
+        if (!email || !password) {
+          console.log("Missing email or password.");
+          return json({ error: "Email and password are required" }, 400);
+        }
 
-  // Check if email and password are provided
-  if (!email || !password) {
-    return res.status(400).json({ error: "Missing required fields." });
-  }
+        // Simulating database query
+        const user = await env.DB.prepare("SELECT * FROM users WHERE email = ?").bind(email).first();
+        if (!user) {
+          console.log("User not found.");
+          return json({ error: "Invalid credentials" }, 401);
+        }
 
-  try {
-    // Try to find user in Trainer table
-    let user = await findTrainerByEmail(email);
+        // Simulating password validation (you can use bcrypt here for actual password comparison)
+        const isPasswordValid = password === user.password; // Replace with bcrypt comparison
+        if (!isPasswordValid) {
+          console.log("Invalid password.");
+          return json({ error: "Invalid credentials" }, 401);
+        }
 
-    // If not found, try Student table
-    if (!user) {
-      user = await findStudentByEmail(email);
+        // Return success response
+        return json({ success: true, role: user.role }, 200);
+        
+      } catch (error) {
+        console.log("Error in login process:", error);
+        return json({ error: "Internal Server Error", details: error.message }, 500);
+      }
     }
 
-    // If no user found in either table, return error
-    if (!user) {
-      return res.status(401).json({ error: "Invalid credentials" });
-    }
-
-    // Compare password with stored hash
-    const isPasswordValid = await bcrypt.compare(password, user.password_hash);
-
-    if (!isPasswordValid) {
-      return res.status(401).json({ error: "Invalid credentials" });
-    }
-
-    // Return the role of the user
-    return res.status(200).json({ success: true, role: user.role });
-
-  } catch (error) {
-    // Handle unexpected errors
-    console.error("Error during login:", error);
-    return res.status(500).json({ error: "Internal server error" });
+    return new Response("Not Found", { status: 404 });
   }
 };
 
-// Function to find a trainer by email
-async function findTrainerByEmail(email) {
-  // Mocked DB lookup for trainer
-  return await db.select("*").from("trainers").where("email", email).first();
-}
-
-// Function to find a student by email
-async function findStudentByEmail(email) {
-  // Mocked DB lookup for student
-  return await db.select("*").from("students").where("email", email).first();
+// Utility function to send JSON response
+function json(data, status = 200) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: { "Content-Type": "application/json" },
+  });
 }
