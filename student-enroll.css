@@ -17,6 +17,7 @@ body{
   color:var(--text);
 }
 
+/* Topbar */
 .topbar{
   background:var(--nav);
   color:#fff;
@@ -51,12 +52,14 @@ body{
 }
 .nav .btn:hover{background:var(--btn2)}
 
+/* Page layout */
 .page{
   padding:40px 16px;
   display:flex;
   justify-content:center;
 }
 
+/* Card */
 .card{
   width:min(920px, 100%);
   background:var(--card);
@@ -77,12 +80,12 @@ h1{
   color:var(--muted);
 }
 
+/* Form */
 .form h2{
   margin:22px 0 12px 0;
   font-size:18px;
   color:#0b1220;
 }
-
 .grid{
   display:grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -105,6 +108,7 @@ h1{
   outline:none;
   font-size:14px;
   background:#fff;
+  color:#0f172a;
 }
 .field input:focus{
   border-color:#93c5fd;
@@ -124,6 +128,7 @@ h1{
   margin-top:20px;
   flex-wrap:wrap;
 }
+
 .submit{
   background:var(--btn);
   color:#fff;
@@ -134,6 +139,7 @@ h1{
   cursor:pointer;
 }
 .submit:hover{background:var(--btn2)}
+
 .link{
   color:#1d4ed8;
   text-decoration:none;
