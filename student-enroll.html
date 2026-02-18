@@ -2,55 +2,57 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Enrollment</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"> <!-- Siguraduhin na ang path ng CSS ay tama -->
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="/home">Home</a></li>
-                <li><a href="/login">Login</a></li>
-                <li><a href="/trainer-register">Trainer Register</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="trainer-register.html">Trainer Register</a></li>
             </ul>
         </nav>
     </header>
 
-    <main>
-        <section class="enrollment">
-            <h1>Student Enrollment</h1>
-            <p>Enroll using Trainer Code to join your trainer's class.</p>
+    <div class="student-enrollment-form">
+        <h1>Student Enrollment</h1>
+        <p>Enroll using Trainer Code to join your trainer's class.</p>
 
-            <form id="studentEnrollForm">
+        <!-- Student Enrollment Form -->
+        <form id="student-enroll-form">
+            <div>
                 <h3>Student Information</h3>
-                <label for="firstName">First Name:</label>
-                <input type="text" id="firstName" name="firstName" required>
-                
-                <label for="lastName">Last Name:</label>
-                <input type="text" id="lastName" name="lastName" required>
-                
-                <label for="email">Email:</label>
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" name="first-name" required>
+
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" name="last-name" required>
+
+                <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
-                
-                <label for="mobile">Mobile Number:</label>
-                <input type="text" id="mobile" name="mobile" pattern="09\d{9}" placeholder="09XXXXXXXXX" required>
+
+                <label for="mobile-number">Mobile Number</label>
+                <input type="tel" id="mobile-number" name="mobile-number" required placeholder="09XXXXXXXXX">
 
                 <h3>Trainer Enrollment</h3>
-                <label for="trainerCode">Trainer Code:</label>
-                <input type="text" id="trainerCode" name="trainerCode" placeholder="Enter Trainer Code" required>
+                <label for="trainer-code">Trainer Code</label>
+                <input type="text" id="trainer-code" name="trainer-code" required placeholder="Enter Trainer Code">
+            </div>
 
-                <h3>Account Security</h3>
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-                
-                <label for="confirmPassword">Confirm Password:</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" required>
-                
-                <button type="submit">Enroll</button>
-            </form>
-        </section>
-    </main>
+            <h3>Account Security</h3>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" name="confirm-password" required>
+
+            <button type="submit">Enroll</button>
+        </form>
+    </div>
 
     <footer>
         <p>&copy; 2026 Computer System Servicing - National Certificate II</p>
