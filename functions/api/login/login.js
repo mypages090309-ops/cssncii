@@ -1,5 +1,3 @@
-// login.js - Handle login for Student and Trainer
-
 const bcrypt = require("bcryptjs"); // Use bcrypt for password hashing and comparison
 
 module.exports = async function (req, res) {
