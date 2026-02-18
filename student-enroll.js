@@ -1,34 +1,78 @@
-document.getElementById("student-enroll-form").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent form submission
+// student-enroll.js
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("studentForm");
+  const msg = document.getElementById("msg");
 
-    // Get form values
-    const firstName = document.getElementById("first-name").value;
-    const lastName = document.getElementById("last-name").value;
-    const email = document.getElementById("email").value;
-    const mobile = document.getElementById("mobile-number").value;
-    const trainerCode = document.getElementById("trainer-code").value;
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirm-password").value;
+  if (!form) {
+    console.error("Form not found: #studentForm");
+    return;
+  }
 
-    // Validate password match
-    if (password !== confirmPassword) {
-        alert("Passwords do not match!");
+  const setMsg = (text) => {
+    if (msg) msg.textContent = text || "";
+  };
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    setMsg("");
+
+    const payload = {
+      firstName: document.getElementById("firstName").value.trim(),
+      lastName: document.getElementById("lastName").value.trim(),
+      email: document.getElementById("email").value.trim().toLowerCase(),
+      mobile: document.getElementById("mobile").value.trim(),
+      trainerCode: document.getElementById("trainerCode").value.trim().toUpperCase(),
+      password: document.getElementById("password").value,
+      confirmPassword: document.getElementById("confirmPassword").value,
+    };
+
+    // Basic required checks
+    const required = ["firstName","lastName","email","mobile","trainerCode","password","confirmPassword"];
+    for (const k of required) {
+      if (!payload[k]) {
+        alert("Pakilagyan lahat ng required fields.");
         return;
+      }
     }
 
-    // Check if mobile number is valid (example format: 09XXXXXXXXX)
-    const mobilePattern = /09\d{9}/;
-    if (!mobilePattern.test(mobile)) {
-        alert("Invalid mobile number format!");
-        return;
+    if (payload.password !== payload.confirmPassword) {
+      alert("Hindi magkapareho ang password at confirm password.");
+      return;
     }
 
-    // Proceed with form submission (you can send this data to your backend here)
-    alert("Student registered successfully!");
+    // Optional: simple PH mobile check
+    if (!/^09\d{9}$/.test(payload.mobile)) {
+      alert("Invalid mobile number. Dapat 09XXXXXXXXX.");
+      return;
+    }
 
-    // Only reset after success message (2 seconds delay)
-    setTimeout(function() {
-        document.getElementById("student-enroll-form").reset();
-    }, 2000); // wait 2 seconds before resetting
+    try {
+      setMsg("Nag-eenroll...");
+
+      // NOTE: naka-route na kayo sa Worker via /api/*
+      // kaya pwede na relative URL:
+      const res = await fetch("/api/student/enroll", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.success) {
+        const txt = `Enrollment successful! Student Code: ${data.studentCode || data.studentId || ""}`.trim();
+        setMsg(txt);
+        alert(txt);
+        form.reset();
+      } else {
+        const err = data.error || "Enrollment failed.";
+        setMsg(err);
+        alert(err);
+      }
+    } catch (error) {
+      console.error(error);
+      setMsg("Network/server error.");
+      alert("Network/server error.");
+    }
+  });
 });
-
