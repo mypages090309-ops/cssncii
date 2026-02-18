@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Enrollment | Computer System Servicing NC II</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="page-wrap">
+    <div class="top-links">
+      <a href="index.html">Home</a>
+      <a href="login.html">Login</a>
+      <a href="trainer-register.html">Trainer Register</a>
+    </div>
+
+    <div class="card">
+      <h1 class="title">Student Enrollment</h1>
+      <p class="subtitle">
+        Enroll using your Trainer Code to join your trainer’s class.
+      </p>
+
+      <form id="studentForm" autocomplete="on">
+
+        <!-- Student Info Section -->
+        <div class="section">
+          <h3>Student Information</h3>
+          <div class="grid">
+            <div class="field">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" name="firstName" placeholder="Juan" required />
+            </div>
+            <div class="field">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" name="lastName" placeholder="Dela Cruz" required />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="juan@email.com" required />
+            </div>
+            <div class="field">
+              <label for="mobile">Mobile Number</label>
+              <input type="tel" id="mobile" name="mobile" placeholder="09XXXXXXXXX" required />
+              <div class="note">Format: 09XXXXXXXXX</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trainer Code Section -->
+        <div class="section">
+          <h3>Trainer Enrollment</h3>
+          <div class="grid">
+            <div class="field">
+              <label for="trainerCode">Trainer Code</label>
+              <input type="text" id="trainerCode" name="trainerCode" placeholder="TR-XXXXXX" required />
+              <div class="note">This code is given by your trainer.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Account Security Section -->
+        <div class="section">
+          <h3>Account Security</h3>
+          <div class="grid">
+            <div class="field">
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password" placeholder="Create password" required />
+            </div>
+            <div class="field">
+              <label for="confirmPassword">Confirm Password</label>
+              <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-type password" required />
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="actions">
+          <button type="submit" class="btn btn-primary" id="submitBtn">
+            Enroll Student
+          </button>
+        </div>
+
+        <!-- Helper Links -->
+        <div class="helper">
+          Already enrolled? <a href="login.html">Login here</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Link JS here -->
+  <script src="student-enroll.js"></script>
+</body>
+</html>
