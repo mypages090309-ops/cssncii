@@ -24,6 +24,7 @@
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
 
+    // Validation checks
     if (!firstName || !lastName || !email || !mobile || !trainerCode || !password) {
       setStatus("Paki kumpletuhin lahat ng fields.", "error");
       return;
@@ -45,8 +46,8 @@
     setStatus("Nag-eenroll...");
 
     try {
-      // IMPORTANT: same domain para walang CORS issue
-      const res = await fetch("/api/student/enroll", {
+      // IMPORTANT: Ensure the correct API URL
+      const res = await fetch("https://cssncii-api.nextwavehub01.workers.dev/api/student/enroll", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
