@@ -1,14 +1,15 @@
-(() => {
+(function () {
   const form = document.getElementById("studentEnrollForm");
   const statusEl = document.getElementById("status");
   const btn = document.getElementById("enrollBtn");
 
-  function setStatus(msg) {
+  function setStatus(msg, type = "info") {
     statusEl.textContent = msg || "";
+    statusEl.className = "status " + type; // status info | ok | error
   }
 
   function normalizeMobile(mobile) {
-    return (mobile || "").trim();
+    return (mobile || "").trim().replace(/\s+/g, "");
   }
 
   form.addEventListener("submit", async (e) => {
@@ -23,32 +24,30 @@
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
 
-    // basic validation
-    if (!firstName || !lastName || !email || !mobile || !trainerCode || !password || !confirmPassword) {
-      setStatus("Pakicomplete lahat ng fields.");
-      return;
-    }
-
-    if (!email.includes("@")) {
-      setStatus("Invalid email.");
-      return;
-    }
-
-    if (password.length < 6) {
-      setStatus("Password must be at least 6 characters.");
+    // Validation checks
+    if (!firstName || !lastName || !email || !mobile || !trainerCode || !password) {
+      setStatus("Paki kumpletuhin lahat ng fields.", "error");
       return;
     }
 
     if (password !== confirmPassword) {
-      setStatus("Hindi magkapareho ang password at confirm password.");
+      setStatus("Hindi magkapareho ang password at confirm password.", "error");
+      return;
+    }
+
+    // PH mobile: 09 + 9 digits = 11 chars total
+    if (!/^09\d{9}$/.test(mobile)) {
+      setStatus("Invalid mobile format. Dapat 09XXXXXXXXX.", "error");
       return;
     }
 
     btn.disabled = true;
     btn.textContent = "Enrolling...";
+    setStatus("Nag-eenroll...");
 
     try {
-      const res = await fetch("/api/student/enroll", {
+      // IMPORTANT: Ensure the correct API URL
+      const res = await fetch("https://cssncii-api.nextwavehub01.workers.dev/api/student/enroll", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -64,21 +63,18 @@
       const data = await res.json().catch(() => ({}));
 
       if (!res.ok) {
-        setStatus(data?.error || "Enrollment failed.");
+        setStatus(data?.error || "Enrollment failed.", "error");
         return;
       }
 
       // success
-      const studentCode = data?.studentCode || "";
-      alert(`Enrollment successful! Student Code: ${studentCode}`);
-      setStatus(`Enrollment successful! Student Code: ${studentCode}`);
-
-      // optional: redirect to login after success
-      // window.location.href = "/login.html";
+      const msg = data?.message || "Enrollment successful!";
+      setStatus(msg, "ok");
+      alert(msg);
 
       form.reset();
     } catch (err) {
-      setStatus("Server error. Pakitry ulit.");
+      setStatus("Server error / network error. Pakisubukan ulit.", "error");
     } finally {
       btn.disabled = false;
       btn.textContent = "Enroll";
