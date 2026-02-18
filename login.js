@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const password = loginForm.querySelector("input[type=password]").value;
 
     // Send login request to Cloudflare Worker API endpoint
-    const response = await fetch("https://cssncii-7et.pages.dev/api/login", {  // Update this URL with the correct one
+    const response = await fetch("https://your-cloudflare-worker-url/api/login", { // Replace with your Cloudflare Worker URL
       method: "POST",
       headers: {
         "Content-Type": "application/json"
