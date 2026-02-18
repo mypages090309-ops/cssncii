@@ -13,22 +13,23 @@
   <!-- Top Nav -->
   <header class="topbar">
     <div class="brand">CSS NC II</div>
+
     <nav class="nav">
       <a href="/" class="nav-link">Home</a>
       <a href="/login.html" class="nav-link">Login</a>
-      <a href="/trainer-register.html" class="nav-btn">Trainer Register</a>
+      <a href="/trainer-register.html" class="btn">Trainer Register</a>
     </nav>
   </header>
 
   <main class="page">
-    <h1 class="page-title">Student Enrollment</h1>
-    <p class="page-subtitle">Enroll using Trainer Code to join your trainer’s class.</p>
-
     <section class="card">
-      <h2 class="card-title">Student Information</h2>
+      <h1>Student Enrollment</h1>
+      <p class="sub">Enroll using Trainer Code to join your trainer’s class.</p>
 
-      <form id="studentEnrollForm" class="form">
-        <div class="grid-2">
+      <form id="studentEnrollForm" class="form" novalidate>
+        <h2>Student Information</h2>
+
+        <div class="grid">
           <div class="field">
             <label for="firstName">First Name</label>
             <input id="firstName" name="firstName" type="text" placeholder="Juan" required />
@@ -46,26 +47,22 @@
 
           <div class="field">
             <label for="mobile">Mobile Number</label>
-            <input id="mobile" name="mobile" type="tel" placeholder="09XXXXXXXXX" required />
-            <small class="hint">Format: 09XXXXXXXXX</small>
+            <input id="mobile" name="mobile" type="tel" placeholder="09XXXXXXXXXX" required />
+            <small>Format: 09XXXXXXXXXX</small>
           </div>
         </div>
 
-        <hr class="divider" />
-
-        <h2 class="card-title">Trainer Enrollment</h2>
+        <h2>Trainer Enrollment</h2>
 
         <div class="field">
           <label for="trainerCode">Trainer Code</label>
           <input id="trainerCode" name="trainerCode" type="text" placeholder="TR-XXXXXX" required />
-          <small class="hint">Ito yung ibibigay ng trainer.</small>
+          <small>This code is given by your trainer.</small>
         </div>
 
-        <hr class="divider" />
+        <h2>Account Security</h2>
 
-        <h2 class="card-title">Account Security</h2>
-
-        <div class="grid-2">
+        <div class="grid">
           <div class="field">
             <label for="password">Password</label>
             <input id="password" name="password" type="password" minlength="6" placeholder="Minimum 6 characters" required />
@@ -78,14 +75,11 @@
         </div>
 
         <div class="actions">
-          <button id="enrollBtn" type="submit" class="primary-btn">Enroll</button>
-          <p class="alt">
-            Already registered?
-            <a href="/login.html">Login here</a>
-          </p>
+          <button id="enrollBtn" type="submit" class="submit">Enroll</button>
+          <a class="link" href="/login.html">Already registered? Login here</a>
         </div>
 
-        <p id="status" class="status" aria-live="polite"></p>
+        <div id="status" class="msg" aria-live="polite"></div>
       </form>
     </section>
   </main>
